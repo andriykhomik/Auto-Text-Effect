@@ -1,27 +1,25 @@
 const textEl = document.querySelector('#text');
 const speedEl = document.querySelector('#speed');
 const text = 'We Love Programming!';
-let idx = 0;
-let speed = 100 / speedEl.value;
+let idx = 1;
+let speed = 300 / speedEl.value;
 
 writeText();
 
 function writeText(){
-    let letters = '';
+    textEl.innerText = text.slice(0, idx);
 
-    const interval = setInterval(()=> {
-        speed = 100 / speedEl.value;
-        const letter = text.charAt(idx);
-        letters = letters + letter;
-        textEl.innerText = letters;
-        idx++
+    idx++;
 
-        if (idx > text.length) {
-            // clearInterval(interval)
-            letters = '';
-            idx = 0;
-        }
-    }, speed);
+    if (idx > text.length) {
+        idx = 1;
+    }
+
+    setTimeout(writeText, speed);
 }
+
+speedEl.addEventListener('input', (e)=> {
+    speed = 300 / e.target.value;
+})
 
 
